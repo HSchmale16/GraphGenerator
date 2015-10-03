@@ -92,6 +92,7 @@ int main(int argc, char** argv){
 void pieGraph(json::json& j){
     double dR = 100, r1 = 0, r2 = dR;
     double radians = 0;
+    double oldRads = 0;
     auto it_maindata = j.find("data");
     if(!it_maindata->is_array()){
         return; 
@@ -112,11 +113,12 @@ void pieGraph(json::json& j){
     for(auto it = it_maindata->begin(); it != it_maindata->end(); ++it){
         auto it_val = it->find("val");
         double size = ((double)*it_val / 100.0) * 2 * M_PI;
+        oldRads = radians;
         radians += size;
         int x1 = cx + cos(radians) * r2;
         int y1 = cy + sin(radians) * r2;
-        int xf = cx + cos(radians - size / 2.0) * r2 * .95;
-        int yf = cy + sin(radians - size / 2.0) * r2 * .95; 
+        int xf = cx + cos(radians - size / 2.0) * r2 * .80;
+        int yf = cy + sin(radians - size / 2.0) * r2 * .80;
         image.draw_line(cx, cy, x1, y1, color);
         image.draw_fill(xf, yf, sect);
         image.draw_text(xf, yf,

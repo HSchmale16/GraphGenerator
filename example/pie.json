@@ -7,7 +7,7 @@
     },
     "data": [
         {
-            "name": "reflected by atomosphere",
+            "name": "reflected by\natomosphere",
             "val": 25
         },
         {
@@ -39,7 +39,7 @@
             ]
         },
         {
-            "name": "Heats/Evaporates",
+            "name": "Heats/\nEvaporates",
             "val": 41
         },
         {
@@ -47,7 +47,7 @@
             "val": 25
         },
         {
-            "name": "Reflected from Surface",
+            "name": "Reflected \nfrom Surface",
             "val": 5
         }
     ]

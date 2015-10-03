@@ -5,4 +5,6 @@ all: $(EXE)
 
 $(EXE): main.cpp
 	g++ -o $@ $(CXX_FLAGS) $^ -lm -lpthread -lX11
-	
+
+clean:
+	rm -r $(EXE)
