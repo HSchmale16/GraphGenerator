@@ -38,7 +38,11 @@ int main(int argc, char** argv){
     std::string indata((std::istreambuf_iterator<char>(infile)),
                         std::istreambuf_iterator<char>());
 
-    json::json j_complete = json::json::parse(indata);
-
+    json::json j_object = json::json::parse(indata);
+    
+    auto it_graph = j_object.find("graph");
+    auto it_width = it_graph->find("width");
+    
+    std::cout << *it_width << std::endl;
     infile.close();
 }

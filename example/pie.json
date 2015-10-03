@@ -1,34 +1,34 @@
 {
     "graph": {
-        "width": "600",
-        "height": "600",
+        "width": 600,
+        "height": 600,
         "title": "Breakdown of Energy Recieved by Earth from the Sun",
         "type": "pie"
     },
     "data": [
         {
             "name": "reflected by atomosphere",
-            "val": "25"
+            "val": 25
         },
         {
             "name": "plants",
-            "val": "4",
+            "val": 4,
             "data": [
                 {
                     "name": "Plants",
-                    "val": "100",
+                    "val": 100,
                     "data": [
                         {
                             "name": "Herbivores",
-                            "val": "10",
+                            "val": 10,
                             "data": [
                                 {
                                     "name": "Carnivores",
-                                    "val": "10",
+                                    "val": 10,
                                     "data": [
                                         {
                                             "name": "Big Carnivores",
-                                            "val": "10"
+                                            "val": 10
                                         }
                                     ]
                                 }
@@ -40,15 +40,15 @@
         },
         {
             "name": "Heats/Evaporates",
-            "val": "41"
+            "val": 41
         },
         {
             "name": "Absorbed",
-            "val": "25"
+            "val": 25
         },
         {
             "name": "Reflected from Surface",
-            "val": "5"
+            "val": 5
         }
     ]
 }
