@@ -1,2 +1,5 @@
 graphgen
 test.png
+*.aux
+*.log
+*.pdf
