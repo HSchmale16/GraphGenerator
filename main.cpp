@@ -28,11 +28,13 @@ typedef void (*funcPointer)(json::json&);
 // forward declare graph drawing functions
 void pieGraph(json::json&);
 void barGraph(json::json&);
+void pieTreeGraph(json::json&);
 
 // declare function pointer map
 std::map<std::string, funcPointer> stringFunctionMap ={
     {"pie", &pieGraph},
-    {"bar", &barGraph}
+    {"bar", &barGraph},
+    {"pietree", &pieTreeGraph}
 }; 
 
 // Just make this global
@@ -127,6 +129,71 @@ void pieGraph(json::json& j){
         sect[i % 3] += rand() % 255;
         i++;
         printf("DrawLine(%d,%d,%d,%d)\n",cx,cy,x1,y1);
+    }
+}
+
+double drawSect(int r, int dR, double startrad, double endrad, json::json j){
+    auto val_it = j.find("val");
+    if(!val_it->is_number())
+        return 0;
+    double val = val_it->get<double>() / 100.0;
+    int cx = image.width() / 2.0;
+    int cy = image.height() / 2.0;
+    uint8_t color[] = {10, 128, 20};
+    uint8_t blac[]  = {0,0,0};
+    double dAngle   = endrad - startrad;
+    double curAng   = startrad;
+    double endAng   = curAng + val * dAngle;
+    int x0 = cx + cos(curAng) * r;
+    int x1 = cx + cos(curAng) * (r + dR);
+    int x2 = cx + cos(endAng) * r;
+    int x3 = cx + cos(endAng) * (r + dR);
+    int y0 = cy + sin(curAng) * r;
+    int y1 = cy + sin(curAng) * (r + dR);
+    int y2 = cy + sin(endAng) * r;
+    int y3 = cy + sin(endAng) * (r + dR);
+    int xf = cx + (cos(curAng + dAngle / 2.0) * (r + .7 * dR));
+    int yf = cy + (sin(curAng + dAngle / 2.0) * (r + .7 * dR));
+    
+    image.draw_circle(cx, cy, r, blac, 1.0, 0);
+    image.draw_line(x0, y0, x1, y1, color);
+    image.draw_line(x2, y2, x3, y3, color);
+    image.draw_text(xf, yf,
+            j.find("name")->get<std::string>().c_str(),
+            blac, NULL, 1.0, 13);
+    auto data_it = j.find("data");
+    if(data_it == j.end())
+        return 0;
+    for(auto it = data_it->begin(); it != data_it->end(); ++it){
+        curAng = drawSect(r + dR, .75 * dR, curAng, endAng, *it);
+    }
+    return endAng;
+}
+
+void pieTreeGraph(json::json& j){
+    double dR = 150, r1 = 0, r2 = dR;
+    double radians = 0;
+    double oldRads = 0;
+    auto it_maindata = j.find("data");
+    if(!it_maindata->is_array()){
+        return; 
+    }
+    int cx = image.width() / 2.0;
+    int cy = image.height() / 2.0;
+    uint8_t color[] = {255, 0, 0};
+    uint8_t color2[] = {0, 0, 0}; // text color
+    uint8_t sect[] = {255, 255, 0};
+    auto it_graph = j.find("graph");
+    image.draw_text(10, 10,
+            it_graph->find("title")->get<std::string>().c_str(),
+            color2, NULL, 1.0, 18);
+    image.draw_circle(cx, cy, dR, color);
+    color[1] = 255;
+    color[2] = 255;
+    int i = 1;
+    //drawSect(int r, int dR, double startrad, double endrad, json::json j)
+    for(auto it = it_maindata->begin(); it != it_maindata->end(); ++it){
+        radians = drawSect(0, dR, radians, 2 * M_PI, *it);
     }
 }
 

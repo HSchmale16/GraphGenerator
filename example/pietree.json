@@ -1,14 +1,18 @@
 {
     "graph": {
-        "width": 600,
-        "height": 600,
+        "width": 900,
+        "height": 900,
         "title": "Breakdown of Energy Recieved by Earth from the Sun",
-        "type": "treepie"
+        "type": "pietree"
     },
     "data": [
         {
-            "name": "reflected by\natomosphere",
-            "val": 25
+            "name": "reflected",
+            "val": 30,
+            "data": [
+                {"name":"Atomsphere", "val": 25},
+                {"name":"Ground", "val": 5}
+            ]
         },
         {
             "name": "plants",
@@ -45,10 +49,6 @@
         {
             "name": "Absorbed",
             "val": 25
-        },
-        {
-            "name": "Reflected \nfrom Surface",
-            "val": 5
         }
     ]
 }

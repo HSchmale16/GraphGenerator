@@ -1,5 +1,5 @@
 EXE := graphgen
-CXX_FLAGS := -std=c++11 -O0
+CXX_FLAGS := -std=c++11 -O0 -g
 
 all: $(EXE) showoff.pdf
 
